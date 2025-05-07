@@ -3,4 +3,5 @@ numpy
 gunicorn
 scikit-learn
 xgboost
+requests
 
