@@ -1,0 +1,6 @@
+﻿Flask
+numpy
+gunicorn
+scikit-learn
+xgboost
+

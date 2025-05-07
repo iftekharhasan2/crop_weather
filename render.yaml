@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: crop-predictor
+    env: python
+    plan: free
+    buildCommand: ""
+    startCommand: gunicorn main:app
+    region: oregon
+    branch: main
+    autoDeploy: true

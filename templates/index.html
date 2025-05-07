@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f9f9f9;
+        }
+
+        form {
+            background-color: white;
+            padding: 60px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        .result {
+            background-color: white;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Crop Prediction Form</h2>
+    <form method="POST" action="/predict">
+        <label for="soil_type">Soil Type:</label>
+        <input type="text" name="soil_type" required>
+
+        <label for="season">Season:</label>
+        <input type="text" name="season" required>
+
+        <label for="farm_area">Farm Area (in acres):</label>
+        <input type="number" name="farm_area" step="0.01" required>
+
+        <label for="irrigation_type">Irrigation Type:</label>
+        <input type="text" name="irrigation_type" required>
+
+        <label for="water_usage">Water Usage (liters):</label>
+        <input type="number" name="water_usage" step="0.01" required>
+
+        <label for="city">City:</label>
+        <input type="text" name="city" required>
+
+        <input type="submit" value="Predict Crop">
+    </form>
+
+    {% if predicted_crop %}
+    <div class="result">
+        <h3>🌱 Predicted Crop: {{ predicted_crop }}</h3>
+    </div>
+    {% endif %}
+
+    {% if weather_info %}
+    <div class="result">
+        <h3>🌦️ Weather in {{ weather_info.city }}</h3>
+        <ul>
+            <li><strong>Temperature:</strong> {{ weather_info.Temperature }} K</li>
+            <li><strong>Humidity:</strong> {{ weather_info.Humidity }}%</li>
+            <li><strong>Weather Condition:</strong> {{ weather_info.Weather }}</li>
+            <li><strong>Wind Speed:</strong> {{ weather_info["Wind Speed"] }} m/s</li>
+        </ul>
+    </div>
+    {% endif %}
+</body>
+</html>
